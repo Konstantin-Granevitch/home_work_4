@@ -13,31 +13,62 @@ class Product:
         self.quantity = quantity
 
     @classmethod
-    def new_product(cls, product_data):
+    def new_product(cls, product_data, list_product=None):
         """метод для создания объекта класса из словаря"""
 
-        return cls(product_data["name"], product_data["description"], product_data["price"], product_data["quantity"])
+        # проверка на наличие списка продуктов
+        if list_product is None:
+            return cls(
+                product_data["name"], product_data["description"], product_data["price"], product_data["quantity"]
+            )
+
+        # проверка на наличие схожего товара в списке товаров для избежания дублирования
+        repl = False # флаг для проверки был ли схожий товар в списке
+        for product in list_product:
+            if product_data["name"] in product.name:
+                repl = True
+                product.quantity += product_data["quantity"]
+                if product_data["price"] > product.price:
+                    product.price = product_data["price"]
+
+        # вывод результата в зависимости от флага
+        if repl:
+            return None
+        else:
+            return list_product.append(
+                cls(product_data["name"], product_data["description"], product_data["price"], product_data["quantity"])
+            )
 
     @property
     def price(self):
+        """метод-геттер для просмотра цены продукта"""
         return self.__price
 
     @price.setter
     def price(self, new_price):
-        if new_price > 0:
+        """метод-сеттер для изменения цены продукта"""
+
+        if 0 < new_price < self.__price:
+            # запрос у пользователя на подтверждение снижения цены
+            user_answer = input("Подтвердите снижение цены 'y/n'\n")
+
+            if user_answer.lower() == "y":
+                self.__price = new_price
+
+        elif new_price > self.__price:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
 
 
 if __name__ == "__main__":
-    prod1 = {"name": "banana", "price": 100.25, "description": "fruit", "quantity": 100}
-    obj1 = Product.new_product(prod1)
-    print(obj1.name)
-    print(obj1.price)
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
-    obj1.price = 51.55
-    print(obj1.price)
+    new_prod = {"name": "Xiaomi Redmi Note 11", "description": "1024GB, Синий", "price": 31000.0, "quantity": 14}
+    list_product = [product1, product2, product3]
 
-    obj1.price = -10
-    print(obj1.price)
+    product4 = Product.new_product(new_prod, list_product)
+
+    print(list_product[-1].quantity)
