@@ -23,7 +23,7 @@ class Product:
             )
 
         # проверка на наличие схожего товара в списке товаров для избежания дублирования
-        repl = False # флаг для проверки был ли схожий товар в списке
+        repl = False  # флаг для проверки был ли схожий товар в списке
         for product in list_product:
             if product_data["name"] in product.name:
                 repl = True
