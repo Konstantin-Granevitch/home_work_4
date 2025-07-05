@@ -38,8 +38,11 @@ class Category:
     def add_product(self, product):
         """метод добавления продукта"""
 
-        self.__products.append(product)
-        self.product_count += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            self.product_count += 1
+        else:
+            print(f"объект {product} не является экземпляром класса 'Product', проверьте данные")
 
 
 if __name__ == "__main__":
@@ -48,6 +51,8 @@ if __name__ == "__main__":
     prod3 = Product("aple", "fruit", 95.99, 100)
     prod4 = Product("pear", "fruit", 130.99, 92)
     categ1 = Category("fruit", "sweet fruits", [prod1, prod2, prod3, prod4])
+    categ1.add_product(Product("pinaple", "fruit", 230.35, 21))
+    categ1.add_product(("mango", "fruit", 190.40, 47))
 
     print(categ1.products)
     print(categ1.product_count)

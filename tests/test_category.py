@@ -1,4 +1,5 @@
 from src.category import Category
+from src.product import Product
 
 
 def test_init_category(fruits):
@@ -14,8 +15,17 @@ def test_add_product_in_category(products):
     """тестирование добавления продуктов"""
 
     categ1 = Category("fruit", "sweet fruits", products)
-
     assert categ1.product_count == 5
+
+
+def test_add_product(fruits):
+    """тестирование добавления продуктов в категорию"""
+
+    fruits.add_product(Product("pinaple", "fruit", 230.35, 21))
+    assert fruits.product_count == 9
+
+    fruits.add_product(("dragon fruit", "fruit", 230.35, 21))
+    assert fruits.product_count == 9
 
 
 def test_view_products_in_category(fruits):
