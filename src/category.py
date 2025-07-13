@@ -24,6 +24,11 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
+    def __str__(self):
+        count_products = sum([product.quantity for product in self.__products]) # расчет общего количества продуктов
+
+        return f"{self.name}, количество продуктов: {count_products} шт."
+
     @property
     def products(self):
         """метод для просмотра приватного метода 'списка продуктов'"""
@@ -31,7 +36,7 @@ class Category:
         list_products = ""
 
         for obj in self.__products:
-            list_products += f"{obj.name}, {obj.price} руб., Остаток: {obj.quantity} шт.\n"
+            list_products += f"{obj}\n"
 
         return list_products
 
@@ -56,3 +61,4 @@ if __name__ == "__main__":
 
     print(categ1.products)
     print(categ1.product_count)
+    print(categ1)
