@@ -27,3 +27,15 @@ def test_new_product():
     obj_pinaple = Product.new_product(pinaple)
 
     assert obj_pinaple.name == "pinaple"
+
+
+def test_str_product(banana):
+    """тест вывода строки с описанием продукта"""
+
+    assert str(banana) == "banana, 150.35 руб. Остаток: 100 шт."
+
+
+def test_add_product(products):
+    """тест проверки сложения продуктов"""
+
+    assert products[0] + products[1] == 17436.08

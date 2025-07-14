@@ -12,6 +12,13 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        summ = self.__price * self.quantity + other.__price * other.quantity
+        return summ
+
     @classmethod
     def new_product(cls, product_data, list_product=None):
         """метод для создания объекта класса из словаря"""
@@ -72,3 +79,5 @@ if __name__ == "__main__":
     product4 = Product.new_product(new_prod, list_product)
 
     print(list_product[-1].quantity)
+    print(product1)
+    print(product1 + product2)

@@ -33,6 +33,12 @@ def test_view_products_in_category(fruits):
 
     assert (
         fruits.products
-        == """orange, 99.9 руб., Остаток: 50 шт.\n\
-banana, 150.79 руб., Остаток: 45 шт.\naple, 95.99 руб., Остаток: 100 шт.\n"""
+        == """orange, 99.9 руб. Остаток: 50 шт.\n\
+banana, 150.79 руб. Остаток: 45 шт.\naple, 95.99 руб. Остаток: 100 шт.\n"""
     )
+
+
+def test_str_category(fruits):
+    """тест вывода строки с описанием категории"""
+
+    assert str(fruits) == "fruits, количество продуктов: 195 шт."
