@@ -25,6 +25,8 @@ class Category:
         Category.product_count += len(self.__products)
 
     def __str__(self):
+        """метод пользовательского отображения данных о категории"""
+
         count_products = sum([product.quantity for product in self.__products])  # расчет общего количества продуктов
 
         return f"{self.name}, количество продуктов: {count_products} шт."
@@ -48,6 +50,7 @@ class Category:
             self.product_count += 1
         else:
             print(f"объект {product} не является экземпляром класса 'Product', проверьте данные")
+            raise TypeError
 
 
 if __name__ == "__main__":

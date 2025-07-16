@@ -13,11 +13,18 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
+        """метод пользовательского отображения данных о продукте"""
+
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        summ = self.__price * self.quantity + other.__price * other.quantity
-        return summ
+        """метод для сложения продуктов и получения итоговой стоимости этих продуктов"""
+
+        if type(self) is type(other):  # проверка на идентичность классов складываемых объектов
+            summ = self.__price * self.quantity + other.__price * other.quantity
+            return summ
+        else:
+            raise TypeError
 
     @classmethod
     def new_product(cls, product_data, list_product=None):
@@ -49,6 +56,7 @@ class Product:
     @property
     def price(self):
         """метод-геттер для просмотра цены продукта"""
+
         return self.__price
 
     @price.setter
@@ -66,6 +74,33 @@ class Product:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
+
+
+class Smartphone(Product):
+    """
+    класс смартфон принимает строки с именем и описанием и числовые значения с ценой и количеством,
+    является подклассом класса продукт
+    """
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+    """
+    класс газон принимает строки с именем и описанием и числовые значения с ценой и количеством,
+    является подклассом класса продукт
+    """
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
 
 
 if __name__ == "__main__":
