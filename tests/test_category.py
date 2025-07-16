@@ -24,8 +24,16 @@ def test_add_product(fruits):
     fruits.add_product(Product("pinaple", "fruit", 230.35, 21))
     assert fruits.product_count == 9
 
-    fruits.add_product(("dragon fruit", "fruit", 230.35, 21))
-    assert fruits.product_count == 9
+
+def test_add_invalid_product(fruits):
+    """тест на попытку добавить 'не продукт' в категорию"""
+
+    try:
+        fruits.add_product(("dragon fruit", "fruit", 230.35, 21))
+    except TypeError:
+        captured = "объект \"dragon fruit\" не является экземпляром класса 'Product'"
+
+    assert captured == "объект \"dragon fruit\" не является экземпляром класса 'Product'"
 
 
 def test_view_products_in_category(fruits):

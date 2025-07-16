@@ -1,4 +1,4 @@
-from src.product import Product
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_init_product(banana):
@@ -39,3 +39,17 @@ def test_add_product(products):
     """тест проверки сложения продуктов"""
 
     assert products[0] + products[1] == 17436.08
+
+
+def test_add_invalid_product():
+    """тест проверки сложения товаров разных категорий"""
+
+    smart = Smartphone("Honor", "hi-tec smartphone", 15900.90, 5, 90.1, "x8b", 256, "green")
+    grass = LawnGrass("lounge", "beauty grass", 10000, 10, "china", "7 days", "green")
+
+    try:
+        sum_ = smart + grass
+    except TypeError:
+        er_message = "TypeError"
+
+    assert er_message == "TypeError"
