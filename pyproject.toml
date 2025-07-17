@@ -12,7 +12,6 @@ python = "^3.12"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
-pytest-mock = "^3.14.1"
 
 
 [tool.poetry.group.lint.dependencies]
