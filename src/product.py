@@ -1,4 +1,26 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+    """базовый абстрактный класс продуктов"""
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+
+class MixinLog:
+    """миксин класс для вывода в консоль информации при создании объекта класса"""
+
+    def __init__(self):
+        print(repr(self))
+
+
+class Product(BaseProduct, MixinLog):
     """класс продукт принимает строки с именем и описанием и числовые значения с ценой и количеством"""
 
     name: str
@@ -11,6 +33,12 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
+
+    def __repr__(self):
+        """метод для вывода отладочной информации об объекте класса """
+
+        return f"{self.__class__.__name__}('{self.name}', '{self.description}', '{self.price}', '{self.quantity}')"
 
     def __str__(self):
         """метод пользовательского отображения данных о продукте"""
@@ -116,3 +144,4 @@ if __name__ == "__main__":
     print(list_product[-1].quantity)
     print(product1)
     print(product1 + product2)
+    print(repr(product1))
