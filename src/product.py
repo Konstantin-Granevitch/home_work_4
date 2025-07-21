@@ -36,7 +36,7 @@ class Product(BaseProduct, MixinLog):
         super().__init__()
 
     def __repr__(self):
-        """метод для вывода отладочной информации об объекте класса """
+        """метод для вывода отладочной информации об объекте класса"""
 
         return f"{self.__class__.__name__}('{self.name}', '{self.description}', '{self.price}', '{self.quantity}')"
 
