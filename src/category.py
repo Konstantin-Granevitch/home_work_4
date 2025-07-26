@@ -52,6 +52,21 @@ class Category:
             print(f"объект {product} не является экземпляром класса 'Product', проверьте данные")
             raise TypeError
 
+    def middle_price(self):
+        """метод для подсчета средней цены продукта в категории"""
+
+        sum_price = 0
+
+        for product in self.__products:
+            sum_price += product.price
+
+        try:
+            mid_price = sum_price / self.product_count
+        except ZeroDivisionError:
+            return 0
+
+        return mid_price
+
 
 if __name__ == "__main__":
     prod1 = Product("orange", "fruit", 99.90, 50)
@@ -60,8 +75,11 @@ if __name__ == "__main__":
     prod4 = Product("pear", "fruit", 130.99, 92)
     categ1 = Category("fruit", "sweet fruits", [prod1, prod2, prod3, prod4])
     categ1.add_product(Product("pinaple", "fruit", 230.35, 21))
-    categ1.add_product(("mango", "fruit", 190.40, 47))
+    # categ1.add_product(("mango", "fruit", 190.40, 47))
 
     print(categ1.products)
     print(categ1.product_count)
     print(categ1)
+    print(categ1.product_count)
+
+    print(categ1.middle_price())
