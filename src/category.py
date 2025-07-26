@@ -55,11 +55,9 @@ class Category:
     def middle_price(self):
         """метод для подсчета средней цены продукта в категории"""
 
-        sum_price = 0
+        sum_price = sum(product.price for product in self.__products)  # расчет суммы цен продуктов в категории
 
-        for product in self.__products:
-            sum_price += product.price
-
+        # расчет средней цены продуктов и перехват пустого списка продуктов
         try:
             mid_price = sum_price / self.product_count
         except ZeroDivisionError:
