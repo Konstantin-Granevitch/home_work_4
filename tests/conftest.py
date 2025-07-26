@@ -9,7 +9,7 @@ def banana():
     return Product("banana", "fruit", 150.35, 100)
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def fruits():
     return Category(
         "fruits",
