@@ -53,3 +53,12 @@ def test_add_invalid_product():
         er_message = "TypeError"
 
     assert er_message == "TypeError"
+
+
+def test_print_mixin(capsys):
+    """тест на вывод отладки через класс миксин"""
+
+    prod_nokia = Product("nokia 5500", "smartphone", 5000, 5)
+    pr_message = capsys.readouterr()
+
+    assert pr_message.out.strip() == "Product('nokia 5500', 'smartphone', '5000', '5')"
