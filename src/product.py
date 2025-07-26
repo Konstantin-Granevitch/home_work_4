@@ -33,6 +33,8 @@ class Product(BaseProduct, MixinLog):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        if self.quantity == 0 or self.quantity is None:
+            raise ValueError("нельзя создать объект класса Product с нулевым количеством!")
         super().__init__()
 
     def __repr__(self):

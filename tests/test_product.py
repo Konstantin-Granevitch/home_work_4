@@ -62,3 +62,14 @@ def test_print_mixin(capsys):
     pr_message = capsys.readouterr()
 
     assert pr_message.out.strip() == "Product('nokia 5500', 'smartphone', '5000', '5')"
+
+
+def test_empty_product_quantity():
+    """проверка на создание объекта с нулевым количеством"""
+
+    try:
+        empty_product = Product("empty", "nothing", 0, 0)
+    except ValueError:
+        empty_mesage = "отсутствуют продукты"
+
+    assert empty_mesage == "отсутствуют продукты"

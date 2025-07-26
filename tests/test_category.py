@@ -1,5 +1,6 @@
 from src.category import Category
 from src.product import Product
+from tests.conftest import fruits
 
 
 def test_init_category(fruits):
@@ -22,7 +23,7 @@ def test_add_product(fruits):
     """тестирование добавления продуктов в категорию"""
 
     fruits.add_product(Product("pinaple", "fruit", 230.35, 21))
-    assert fruits.product_count == 9
+    assert fruits.product_count == 6
 
 
 def test_add_invalid_product(fruits):
@@ -42,11 +43,25 @@ def test_view_products_in_category(fruits):
     assert (
         fruits.products
         == """orange, 99.9 руб. Остаток: 50 шт.\n\
-banana, 150.79 руб. Остаток: 45 шт.\naple, 95.99 руб. Остаток: 100 шт.\n"""
+banana, 150.79 руб. Остаток: 45 шт.\naple, 95.99 руб. Остаток: 100 шт.\npinaple, 230.35 руб. Остаток: 21 шт.\n"""
     )
 
 
 def test_str_category(fruits):
     """тест вывода строки с описанием категории"""
 
-    assert str(fruits) == "fruits, количество продуктов: 195 шт."
+    assert str(fruits) == "fruits, количество продуктов: 216 шт."
+
+
+def test_mid_price_category(fruits):
+    """тестирование метода расчета средней цены продукта"""
+
+    assert fruits.middle_price() == 96.17166666666667
+
+
+def test_mid_price_empty_category():
+    """тестирование подсчета средней цены пустой категории"""
+
+    empty_category = Category("empty", "nothing", [])
+
+    assert empty_category.middle_price() == 0
